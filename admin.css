@@ -1,0 +1,261 @@
+
+/*---------------------------------------------------- Admin Design */ 
+body h1
+{
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0; /* Start after the sidebar */
+    right: 0;
+    height: 30px;
+    background-color: #014887; /* Header color */
+    font-size: medium;
+    display: flex;
+    align-items: center;
+    padding-left: 225px; /* Adjust padding for spacing */
+    z-index: 2;
+}
+
+
+
+#Add_book
+{
+    margin-top: 50px;
+}
+#Add_book{
+background-color: #1006a0;
+color: #ffffff;
+border: none;
+border-radius: 5px;
+padding: 10px 20px;
+
+
+}
+#Add_book:hover{
+    background-color: #030066;
+}
+#addbutton {
+  text-align: center;
+  margin: 20px;
+}
+
+#addbutton button {
+  background-color: #1006a0; /* Green */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+
+}
+#addbutton button:hover {
+  background-color: #030066;
+ 
+}
+
+.dashboard_border {
+  border: 3px solid #ebebeb;
+  padding: 15px;
+  border-radius: 7px;
+  box-shadow: inset 0 0 0 1px #ffffff;
+  background-color: #f5f5f5;
+  display: flex;
+  gap: 10px; 
+  flex-wrap: wrap; 
+}
+
+.border-total,
+.border-borrow,
+.border-approve,
+.border-user{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1; 
+  width: 300px; 
+  height: 100px;
+  color: #ffffff;
+  font-size: medium;
+  text-align: left;
+  padding: 10px;
+  border-radius: 5px;
+}
+.border-user{
+    background-color:#ff2b2bc1;
+}
+.border-total {
+  background-color: #0175afc1;
+}
+
+.border-borrow {
+  background-color: #caef0e;
+}
+
+.border-approve {
+  background-color: #03c934e0;
+}
+.close{
+    background-color: rgb(255, 255, 255);
+}
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 24px;
+  color: #333;
+ 
+}
+
+.close:hover {
+  color: red;
+}
+
+.container_adminpanel {
+    display: flex;
+    flex-direction: row;
+    font-family: Arial, sans-serif;
+    background-color: rgb(255, 255, 255);
+    min-height: 100vh;
+}
+
+/* Sidebar styles */
+.sidebar {
+    width: 220px;
+    background-color: #2C384A;
+    color: white;
+    padding-top: 50px;
+    flex-shrink: 0;
+}
+
+.sidebar button {
+    display: block;
+    width: 100%;
+    border: none;
+    padding: 15px;
+    color: white;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+}
+
+.sidebar button:hover {
+    background-color: #044a90;
+}
+.sidebar button.active-btn {
+    background-color: #044a90;
+}
+
+.mainpanel {
+    flex: 1;
+    padding: 20px;
+    overflow-x: auto;
+}
+
+.panel {
+    display: none;
+}
+
+.panel.active {
+    display: block;
+}
+
+/* Modal or dialog box for addbook */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    inset: 0; /* shorthand for top, right, bottom, left */
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* Heading */
+.Heading-top {
+    position: fixed;
+    top: 0;
+    left: 200px;
+    right: 0;
+    height: 65px;
+    background-color: #ffffff;
+    font-size: larger;
+    display: flex;
+    align-items: center;
+    padding-left: 120px;
+    z-index: 2;
+}
+
+.text-wrapper-5,
+.text-wrapper-6 {
+    font-family: "Montserrat-SemiBold", Helvetica;
+    font-weight: 600;
+    color: #000000;
+    white-space: nowrap;
+}
+
+.text-wrapper-5 {
+    font-size: 16px;
+    line-height: 22.4px;
+}
+
+.text-wrapper-6 {
+    font-size: 12px;
+    line-height: 16.8px;
+}
+
+.user-icon {
+    position: absolute;
+    font-size: x-large;
+    width: 40px;
+    height: 40px;
+    top: 14px;
+    left: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container_adminpanel {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .sidebar button {
+        flex: 1 1 50%;
+        text-align: center;
+    }
+
+    .Heading-top {
+        left: 0;
+        padding-left: 60px;
+    }
+    h2 {
+        position: fixed;
+        top: 0;
+        left: 0; /* Make it span the full width of the screen */
+        right: 0;
+        height: 65px;
+        background-color: #ffffff; /* Header color */
+        font-size: 24px; /* Adjust font size for mobile */
+        display: flex;
+        align-items: center;
+        padding-left: 20px;
+        z-index: 2;
+    }
+}
