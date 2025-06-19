@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Sign in </title>
+    <link rel="stylesheet" href="../assets/signin.css">
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+</head>
+
+<body>
+  
+  <div class="containerlogin">
+  <form id="loginForm">
+      <h1 class="h3 mb-3 fw-bold">Please Sign In</h1>
+
+      <div class="form-lemail">
+        <label for="email">Email address</label> <br>
+        <input type="email" name="email" class="form-control" id="email" required placeholder="name@example.com">
+      </div>
+
+      <div class="form-lpassword">
+        <label for="password">Password</label> <br>
+        <input type="password" name="password" class="form-control" id="password" required placeholder="Password">
+         <span class="icon toggle-password" onclick="togglePassword()">
+              <i class="bi bi-eye-slash-fill"id="eyeIcon"></i>
+            </span>
+      </div>
+ 
+      <button type="submit" id="signIn" name="signIn">Sign in</button>
+      <div id="errorMsg" style="color: red; margin-top: 10px;"></div>
+      <p class="regis">Don't have an account? 
+      <a href="#" style="color:rgba(0, 117, 219, 0.893)" onclick="registerbtn();">Register</a>
+      </p>
+    </form>
+  </div>
+<script src="../assets/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+   integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+</body>
+</html>
+
