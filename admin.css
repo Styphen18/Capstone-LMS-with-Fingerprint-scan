@@ -247,6 +247,27 @@ padding: 10px 20px;
     left: 20px;
 }
 
+
+/*user modal*/
+#userModal {
+  display: none;
+    position: fixed;
+    z-index: 1;
+    inset: 0; /* shorthand for top, right, bottom, left */
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+#userModal form {
+ background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+}
 /* Responsive Design */
 @media (max-width: 768px) {
     .container_adminpanel {

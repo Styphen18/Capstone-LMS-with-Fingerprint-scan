@@ -35,14 +35,14 @@
                 <i class="bi bi-journal-bookmark-fill" style="color: #ffffff;">Book Logs </i>
               </button>
           </div>
-                    <div class="content-area">
-          <div class="profile-header">
-            <i class="bi bi-person-circle"></i> Profile/Header
-          </div>
-          <div class="mainpanel">
-          <div id="dashboard" class="panel active">
+          <div class="content-area">
+                  <div class="profile-header">
+                    <i class="bi bi-person-circle"></i> Profile/Header
+                  </div>
+           <div class="mainpanel">
+              <div id="dashboard" class="panel active">
               
-              <div class="dashboard_border">
+               <div class="dashboard_border">
               <!-- boook-->
                 <div class="border-total">
                   <div>
@@ -82,8 +82,31 @@
               <p> Test test Test</p>
             </div>
 
+            <!--account management-->
             <div id="employee" class="panel">
-              <p>List of employees, add/edit functionality here.</p>
+             <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">YearCourse/Department</th>
+                        <th scope="col">Student/Faculty ID</th>
+                        <th scope="col">Contact no.</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Email</th>
+                        
+                        <th scope="col">ACTIONS</th>
+                      </tr>
+                    </thead>
+                  <tbody id="userTableBody" class="table-group-divider">
+                  </tbody>
+                  </table>
+         
+           <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-end" id="pagination">
+                <!-- Pagination buttons will be inserted dynamically -->
+              </ul>
+          </nav>
             </div>
 
             <div id="logsPanel" class="panel"> 
@@ -159,9 +182,27 @@
       </div>
   </div>
      
+  <div id="userModal" style="display: none;">
+  
+  <form id="accForm">
+    <h2>Update Account</h2>
+    <input type="hidden" id="userId" name="id">
+
+    <input type="text" id="fullname" name="fullname" placeholder="Full Name" required>
+    <input type="text" id="yrcourse" name="yrcourse" placeholder="Year & Course" required>
+    <input type="text" id="studentid" name="studentid" placeholder="Student ID" required>
+    <input type="text" id="contact" name="contact" placeholder="Contact" required>
+    <input type="email" id="email" name="email" placeholder="Email" required>
+    <input type="password" id="password" name="password" placeholder="New Password (optional)">
+
+    <button type="submit">Update</button>
+  </form>
+</div>
 
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" 
       integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
-      <script src="../assets/showfunctionscript.js"></script>
+    
+        <script src="../assets/showfunctionscript.js"></script>
+     
   </body>
   </html>

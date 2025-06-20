@@ -33,8 +33,10 @@ function showPanel(panelId) {
   }
 
   if (panelId === 'books') {
-    loadBooks(currentPage);
-  }
+  loadBooks(currentPage);
+} else if (panelId === 'employee') {
+  loadUsers(currentPage);
+}
 }
 
 
@@ -50,6 +52,7 @@ function loadBooks(page = 1) {
       console.error("Error loading crud.php:", error);
     });
 }
+
 
 function setupPagination(totalPages, current) {
   const pagination = document.getElementById('pagination');
@@ -265,3 +268,170 @@ window.onload = function() {
  // getrequesttotal();
   getdashboard();
 };
+
+
+//user
+function loadUsers(page = 1) {
+  fetch(`../backend/acc_crud.php?page=${page}`) 
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById('userTableBody').innerHTML = data.users;
+      setupUserPagination(data.totalPages, page);
+    })
+    .catch(error => {
+      document.getElementById('userTableBody').innerHTML = "Error loading user list.";
+      console.error("Error loading acc_crud.php:", error);
+    });
+}
+
+//pagination for user
+function setupUserPagination(totalPages, currentPage) {
+  const pagination = document.getElementById('pagination');
+  pagination.innerHTML = '';
+
+  for (let i = 1; i <= totalPages; i++) {
+    const li = document.createElement('li');
+    li.classList.add('page-item');
+    if (i === currentPage) li.classList.add('active');
+
+    const a = document.createElement('a');
+    a.classList.add('page-link');
+    a.href = '#';
+    a.textContent = i;
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      loadUsers(i);
+    });
+
+    li.appendChild(a);
+    pagination.appendChild(li);
+  }
+}
+
+// userrrrrrrrrrrrrrrrrrrrrrrrrrrr
+
+function submitAddAccount(event) {
+  event.preventDefault();
+
+  const fullname = document.getElementById('fullname').value.trim();
+  const yrcourse = document.getElementById('yrcourse').value.trim();
+  const studentid = document.getElementById('studentid').value.trim();
+  const contact = document.getElementById('contact').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value.trim();
+
+  if (!fullname || !yrcourse || !studentid || !contact || !email || !password) {
+    alert("Please fill in all required fields.");
+    return;
+  }
+
+  fetch('../backend/acc_crud.php', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: 
+      'fullname=' + encodeURIComponent(fullname) +
+      '&yrcourse=' + encodeURIComponent(yrcourse) +
+      '&studentid=' + encodeURIComponent(studentid) +
+      '&contact=' + encodeURIComponent(contact) +
+      '&email=' + encodeURIComponent(email) +
+      '&password=' + encodeURIComponent(password)
+  })
+  .then(response => response.text())
+  .then(data => {
+    console.log(data);
+    closeUserModal();
+    document.getElementById("accForm").reset();
+    showPanel('users');
+  })
+  .catch(error => {
+    alert("Error: " + error);
+  });
+}
+
+function openUpdateModaluser(id, name, department, studentId, contact, email) {
+  document.getElementById('userId').value = id;
+  document.getElementById('fullname').value = name;
+  document.getElementById('yrcourse').value = department;
+  document.getElementById('studentid').value = studentId;
+  document.getElementById('contact').value = contact;
+  document.getElementById('email').value = email;
+  document.getElementById('password').value = ""; // always empty
+
+  document.querySelector('#userModal h2').textContent = "Update Account";
+  document.querySelector('#accForm button[type="submit"]').textContent = "Update";
+  document.getElementById('accForm').onsubmit = submitUpdateAccount;
+
+  document.getElementById('userModal').style.display = "flex";
+}
+
+function submitUpdateAccount(event) {
+  event.preventDefault();
+
+  const id = document.getElementById('userId').value;
+  const fullname = document.getElementById('fullname').value.trim();
+  const yrcourse = document.getElementById('yrcourse').value.trim();
+  const studentid = document.getElementById('studentid').value.trim();
+  const contact = document.getElementById('contact').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value.trim();
+
+  const body = 
+    'id=' + encodeURIComponent(id) +
+    '&fullname=' + encodeURIComponent(fullname) +
+    '&yrcourse=' + encodeURIComponent(yrcourse) +
+    '&studentid=' + encodeURIComponent(studentid) +
+    '&contact=' + encodeURIComponent(contact) +
+    '&email=' + encodeURIComponent(email) +
+    '&password=' + encodeURIComponent(password);
+
+  fetch('../backend/acc_crud.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: body
+  })
+  .then(response => response.text())
+  .then(data => {
+    console.log(data);
+    closeUserModal();
+    document.getElementById("accForm").reset();
+    showPanel('users');
+  })
+  .catch(error => alert("Error: " + error));
+}
+
+document.addEventListener('click', function (e) {
+  if (e.target.classList.contains('update-btn-user')) {
+    e.preventDefault();
+
+    const btn = e.target;
+    openUpdateModaluser(
+  btn.dataset.id,
+  btn.dataset.name,
+  btn.dataset.department,
+  btn.dataset.student_id,
+  btn.dataset.contact,
+  btn.dataset.email
+);
+  }
+});
+
+function openUserModal() {
+  document.getElementById('accForm').reset();
+  document.getElementById('userId').value = "";
+
+  document.querySelector('#userModal h2').textContent = "Add Account";
+  document.querySelector('#accForm button[type="submit"]').textContent = "Add";
+  document.getElementById('accForm').onsubmit = submitAddAccount;
+
+  document.getElementById("userModal").style.display = "flex";
+}
+
+function closeUserModal() {
+  document.getElementById('userModal').style.display = "none";
+  document.getElementById('accForm').reset();
+  document.getElementById('userId').value = "";
+  document.getElementById('accForm').onsubmit = submitAddAccount;
+}
+
