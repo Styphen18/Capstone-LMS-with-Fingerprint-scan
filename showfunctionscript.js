@@ -118,7 +118,7 @@ function submitUpdateForm(event) {
   const quantity = document.getElementById('quantity').value.trim();
   const genre = document.getElementById('genre').value.trim();
 
-  fetch('../backend/update_book.php', {
+  fetch('../backend/book_management.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: 
@@ -175,7 +175,7 @@ function submitBookForm(event) {
     return;
   }
 
-  fetch('../backend/add_book.php', {
+  fetch('../backend/book_management.php', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -204,7 +204,7 @@ function submitBookForm(event) {
 function deleteBook(bookId) {
   if (!confirm("Are you sure you want to delete this book?")) return;
 
-  fetch(`../backend/delete_book.php?id=${bookId}`)
+  fetch(`../backend/book_management.php?id=${bookId}`)
     .then(response => response.text())
     .then(data => {
       console.log(data);
