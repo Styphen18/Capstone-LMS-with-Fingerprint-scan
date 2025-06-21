@@ -41,7 +41,7 @@ function showPanel(panelId) {
 
 
 function loadBooks(page = 1) {
-  fetch(`../backend/crud.php?page=${page}`)
+  fetch(`../backend/book_management.php?page=${page}`)
     .then(response => response.json())
     .then(data => {
       document.getElementById('bookTableBody').innerHTML = data.books;
@@ -49,7 +49,7 @@ function loadBooks(page = 1) {
     })
     .catch(error => {
       document.getElementById('bookTableBody').innerHTML = "Error loading book list.";
-      console.error("Error loading crud.php:", error);
+      console.error("Error loading book_management.php:", error);
     });
 }
 
@@ -205,19 +205,35 @@ function submitBookForm(event) {
 
 // Delete
 function deleteBook(bookId) {
-  if (!confirm("Are you sure you want to delete this book?")) return;
+  const dialog = document.getElementById('confirmDialog');
+  dialog.style.display = 'block';
 
-  fetch(`../backend/book_management.php?id=${bookId}`)
-    .then(response => response.text())
-    .then(data => {
-      console.log(data);
-      showPanel('books'); // Refresh the list after delete
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      alert('Failed to delete the book.');
-    });
-}   
+  const yesBtn = document.getElementById('confirmYes');
+  const noBtn = document.getElementById('confirmNo');
+
+  yesBtn.onclick = null;
+  noBtn.onclick = null;
+
+  yesBtn.onclick = () => {
+    dialog.style.display = 'none';
+
+    fetch(`../backend/book_management.php?id=${bookId}`)
+      .then(response => response.text())
+      .then(data => {
+        console.log(data);
+        showPanel('books'); 
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to delete the book.');
+      });
+  };
+
+  noBtn.onclick = () => {
+    dialog.style.display = 'none';
+  };
+}
+   
 
 
 // DASHBOARD
@@ -250,20 +266,6 @@ function getdashboard() {
       console.error("Fetch error:", error);
     });
 }
-
-
-// pending request
-/*function getrequesttotal() {
-  fetch('../backend/pending_total.php')
-    .then(response => response.text())
-    .then(total_pending => {
-      document.querySelector('.num_req').textContent = total_pending;
-    })
-    .catch(error => {
-      document.querySelector('.num_req').textContent = "Error loading";
-      console.error("Fetch error:", error);
-    });
-}*/
 window.onload = function() {
  // getrequesttotal();
   getdashboard();
@@ -272,7 +274,7 @@ window.onload = function() {
 
 //user
 function loadUsers(page = 1) {
-  fetch(`../backend/acc_crud.php?page=${page}`) 
+  fetch(`../backend/account_management.php?page=${page}`) 
     .then(response => response.json())
     .then(data => {
       document.getElementById('userTableBody').innerHTML = data.users;
@@ -280,13 +282,13 @@ function loadUsers(page = 1) {
     })
     .catch(error => {
       document.getElementById('userTableBody').innerHTML = "Error loading user list.";
-      console.error("Error loading acc_crud.php:", error);
+      console.error("Error loading account_management.php:", error);
     });
 }
 
 //pagination for user
 function setupUserPagination(totalPages, currentPage) {
-  const pagination = document.getElementById('pagination');
+  const pagination = document.getElementById('pagination-user');
   pagination.innerHTML = '';
 
   for (let i = 1; i <= totalPages; i++) {
@@ -325,7 +327,7 @@ function submitAddAccount(event) {
     return;
   }
 
-  fetch('../backend/acc_crud.php', {
+  fetch('../backend/account_management.php', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
@@ -343,7 +345,7 @@ function submitAddAccount(event) {
     console.log(data);
     closeUserModal();
     document.getElementById("accForm").reset();
-    showPanel('users');
+    showPanel('employee');
   })
   .catch(error => {
     alert("Error: " + error);
@@ -386,7 +388,7 @@ function submitUpdateAccount(event) {
     '&email=' + encodeURIComponent(email) +
     '&password=' + encodeURIComponent(password);
 
-  fetch('../backend/acc_crud.php', {
+  fetch('../backend/account_management.php', {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: body
@@ -396,7 +398,7 @@ function submitUpdateAccount(event) {
     console.log(data);
     closeUserModal();
     document.getElementById("accForm").reset();
-    showPanel('users');
+    showPanel('employee');
   })
   .catch(error => alert("Error: " + error));
 }
@@ -416,6 +418,39 @@ document.addEventListener('click', function (e) {
 );
   }
 });
+
+// Delete user
+function deletuser(userId) {
+  const dialog = document.getElementById('userdialog');
+  dialog.style.display = 'block';
+
+  const yesBtn = document.getElementById('users-yes'); 
+  const noBtn = document.getElementById('users-no');   
+
+  yesBtn.onclick = null;
+  noBtn.onclick = null;
+
+  yesBtn.onclick = (e) => {
+    e.preventDefault(); 
+    dialog.style.display = 'none';
+
+    fetch(`../backend/account_management.php?id=${userId}`)
+      .then(response => response.text())
+      .then(data => {
+        console.log(data);
+        showPanel('employee'); // Reload the user table
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to delete the account.');
+      });
+  };
+
+  noBtn.onclick = () => {
+    dialog.style.display = 'none';
+  };
+}
+
 
 function openUserModal() {
   document.getElementById('accForm').reset();

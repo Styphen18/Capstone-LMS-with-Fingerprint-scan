@@ -80,6 +80,8 @@
 
             <div id="borrowPanel" class="panel">
               <p> Test test Test</p>
+
+              
             </div>
 
             <!--account management-->
@@ -103,7 +105,7 @@
                   </table>
          
            <nav aria-label="Page navigation example">
-              <ul class="pagination justify-content-end" id="pagination">
+              <ul class="pagination justify-content-end" id="pagination-user">
                 <!-- Pagination buttons will be inserted dynamically -->
               </ul>
           </nav>
@@ -197,6 +199,26 @@
 
     <button type="submit">Update</button>
   </form>
+</div>
+
+<div class="dialog-delete">
+  <!--for delete books-->
+<div id="confirmDialog" class="custom-dialog">
+  <div class="dialog-box">
+    <p>Are you sure you want to delete this book?</p>
+    <button id="confirmYes" class="btn-confirm">Yes</button>
+    <button id="confirmNo" class="btn-cancel">No</button>
+  </div>
+</div>
+
+<!--for delete users-->
+<div id="userdialog" class="user-dialog">
+  <div class="user-dialog-box">
+    <p>Are you sure you want to delete this account?</p>
+    <button id="users-yes" class="user-btn-yes">Yes</button>
+    <button id="users-no" class="user-btn-cancel">No</button>
+  </div>
+</div>
 </div>
 
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" 

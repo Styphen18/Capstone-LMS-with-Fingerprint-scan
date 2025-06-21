@@ -41,41 +41,6 @@
 font-size: clamp(16px, 4vw, 36px);
 }
 
-#Add_book
-{
-    margin-top: auto;
-}
-#Add_book{
-background-color: #1006a0;
-color: #ffffff;
-border: none;
-border-radius: 5px;
-padding: 10px 20px;
-
-
-}
-#Add_book:hover{
-    background-color: #030066;
-}
-#addbutton {
-  text-align: center;
-  margin: 20px;
-}
-
-#addbutton button {
-  background-color: #1006a0; /* Green */
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  border-radius: 8px;
-  cursor: pointer;
-
-}
-#addbutton button:hover {
-  background-color: #030066;
- 
-}
 
 .dashboard_border {
   border: 3px solid #ebebeb;
@@ -118,22 +83,7 @@ padding: 10px 20px;
 .border-approve {
   background-color: #03c934e0;
 }
-.close{
-    background-color: rgb(255, 255, 255);
-}
-.close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-  font-size: 24px;
-  color: #333;
- 
-}
 
-.close:hover {
-  color: red;
-}
 
 .container_adminpanel {
     display: flex;
@@ -184,25 +134,109 @@ padding: 10px 20px;
     display: block;
 }
 
-/* Modal or dialog box for addbook */
+
+/* Modal container */
+/* Modal container */
 .modal {
     display: none;
     position: fixed;
-    z-index: 1;
-    inset: 0; /* shorthand for top, right, bottom, left */
+    z-index: 1000;
+    inset: 0;
     background-color: rgba(0, 0, 0, 0.5);
     justify-content: center;
     align-items: center;
+    overflow-y: auto;
+    padding: 1rem;
 }
 
+/* Modal box */
 .modal-content {
     background-color: #fefefe;
-    padding: 20px;
+    padding: 2rem 1.5rem;
     border: 1px solid #ffffff;
-    border-radius: 5px;
-    width: 90%;
-    max-width: 400px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     text-align: center;
+    box-sizing: border-box;
+    position: relative;
+}
+
+/* Modal heading */
+.modal-content h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Close icon button */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    background-color: #ffffff;
+    color: #333;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 4px 8px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.close:hover {
+    color: red;
+    background-color: #f0f0f0;
+}
+
+/* Form fields inside modal */
+.modal-content .form-floating {
+    margin-bottom: 1rem;
+}
+
+.modal-content input.form-control {
+    width: 100%;
+    font-size: 1rem;
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+/* Add Book button (outside modal) */
+#Add_book {
+    margin-top: auto;
+    background-color: #1006a0;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#Add_book:hover {
+    background-color: #030066;
+}
+
+/* Submit button inside modal */
+#addbutton {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+#addbutton button {
+    background-color: #1006a0;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#addbutton button:hover {
+    background-color: #030066;
 }
 
 /* Heading */
@@ -268,9 +302,62 @@ padding: 10px 20px;
     max-width: 400px;
     text-align: center;
 }
+
+/*delete dialog*/
+.custom-dialog,
+.user-dialog {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+
+.dialog-box,
+.user-dialog-box{
+  background: white;
+  padding: 20px;
+  width: 300px;
+  margin: 15% auto;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.dialog-box p,
+.user-dialog-box p {
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+#confirmDialog button,
+#userdialog button {
+  padding: 8px 16px;
+  margin: 0 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-confirm,
+.user-btn-yes {
+  background-color: #e74c3c;
+  color: white;
+}
+
+
+.btn-cancel,
+.user-btn-cancel {
+  background-color: #bdc3c7;
+  color: black;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
-    .container_adminpanel {
+   .container_adminpanel {
         flex-direction: column;
     }
 
@@ -289,17 +376,43 @@ padding: 10px 20px;
         left: 0;
         padding-left: 60px;
     }
+
     h2 {
         position: fixed;
         top: 0;
-        left: 0; /* Make it span the full width of the screen */
+        left: 0;
         right: 0;
         height: 65px;
-        background-color: #ffffff; /* Header color */
-        font-size: 24px; /* Adjust font size for mobile */
+        background-color: #ffffff;
+        font-size: 24px;
         display: flex;
         align-items: center;
         padding-left: 20px;
         z-index: 2;
+    }
+
+    .modal-content {
+        padding: 1.2rem;
+    }
+
+    .modal-content h2 {
+        font-size: 1.25rem;
+    }
+
+    #addbutton button,
+    #Add_book {
+        width: 100%;
+        padding: 12px;
+        font-size: 1rem;
+    }
+
+    .close {
+        font-size: 18px;
+        padding: 3px 6px;
+    }
+
+    .modal-content input.form-control {
+        font-size: 0.95rem;
+        padding: 10px;
     }
 }
